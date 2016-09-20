@@ -17,12 +17,12 @@ function auth() {
             console.log(jwtDetails);
             // expire our cookie in 7 days
             createCookie(COOKIE_NAME, jwtDetails, 7);
-            success(jwtDetails);
+            success(data);
         });
 
     }
     function logout() {
-
+        delete_cookie(COOKIE_NAME);
     }
     function delete_cookie(name) {
         document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
@@ -36,19 +36,19 @@ function auth() {
         } else var expires = "";
         document.cookie = name + "=" + value + expires + "; path=/";
     }
-    function getCookie(name) {
+    function getToken(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
-        if (parts.length == 2) return parts.pop().split(";").shift();
+        if (parts.length == 2) return JSON.parse(parts.pop().split(";").shift());
     }
 
-    function getLoggedInCookie() {
-        return getCookie(COOKIE_NAME);
+    function getLoggedInToken() {
+        return getToken(COOKIE_NAME);
     }
 
     return {
-        getLoggedInCookie: getLoggedInCookie,
+        getLoggedInToken: getLoggedInToken,
         login: login,
         logout: logout
-}
+    }
 };
