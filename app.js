@@ -3,19 +3,20 @@
 var auth = auth();
 $("#login").click(function () {
 
-    var email = $("#username").val();
+    var username = $("#username").val();
     var password = $("#password").val();
     // log out before we try to log in again
     auth.logout();
-    auth.login(email, password, successFunction, errorFunction);
-
+    auth.login(username, password, successFunction, errorFunction);
 });
 
 function successFunction() {
     checkLoggedIn();
+    console.log("Success. Logged In");
 }
-function errorFunction() {
+function errorFunction(error) {
     checkLoggedIn();
+    console.log("There was a error logging in." + error.responseText);
 }
 
 $("#logout").click(function () {

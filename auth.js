@@ -1,17 +1,21 @@
 "use strict";
 function auth() {
 
+    // save the valid token in a cookie so it is available next time you
+    // come to the site
     var COOKIE_NAME = 'mycookiename';
 
     function login(email, password, success, failure) {
-
+        // where is your wordpress site?
         var apiHost = '//localhost/wordpress/wp-json';
 
         var data = {
             username: email,
             password: password
         };
-        $.post(apiHost + '/jwt-auth/v1/token', data).done(function (data) {
+        $.post(apiHost + '/jwt-auth/v1/token', data).error(function (error) {
+            failure(error);
+        }).done(function (data) {
             // you are now logged in, save the cookie to validate further requests
             var jwtDetails = JSON.stringify(data);
             console.log(jwtDetails);
