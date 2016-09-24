@@ -13,6 +13,7 @@ function auth() {
             username: email,
             password: password
         };
+        // the important bit, contact the end point and ask for a token
         $.post(apiHost + '/jwt-auth/v1/token', data).error(function (error) {
             failure(error);
         }).done(function (data) {
