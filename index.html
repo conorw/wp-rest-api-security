@@ -6,13 +6,16 @@
 
 <body>
     <div>
+        <!--log in out fields-->
         <div id="logindetails" class="form-group">
             <input type="text" class="form-control input-sm" name="username" id="username" placeholder="Username">
             <input onkeydown="if (event.keyCode == 13) document.getElementById('login').click()" type="password" class="form-control input-sm"
                 name="password" id="password" placeholder="Password">
         </div>
+        <!--Sign in and out buttons-->
         <button type="submit" id="login" style="display:none" class="btn btn-xs btn-default">Sign In</button>
         <button type="submit" id="logout" style="display:none" class="btn btn-xs btn-default">Sign Out</button>
+        <!--Display if the user is logged in-->
         <div style="display:none" id="specialcontent">
             Welcome back <span id="currentuser"></span>
         </div>

@@ -16,7 +16,7 @@ function successFunction() {
 }
 function errorFunction(error) {
     checkLoggedIn();
-    console.log("There was a error logging in." + error.responseText);
+    console.log("There was a error logging in. " + error.responseText);
 }
 
 $("#logout").click(function () {
@@ -27,12 +27,14 @@ $("#logout").click(function () {
 function checkLoggedIn() {
     var token = auth.getLoggedInToken();
     if (token) {
+        // hide the login buttons and other fields if we are logged in
         $("#login").hide();
         $("#logindetails").hide();
         $("#specialcontent").show();
         $("#logout").show();
         $("#currentuser").text(token.user_display_name);
     } else {
+        // hide the logout buttons and other fields if we are NOT logged in
         $("#logout").hide();
         $("#specialcontent").hide();
         $("#login").show();

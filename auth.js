@@ -6,22 +6,25 @@ function auth() {
     var COOKIE_NAME = 'mycookiename';
 
     function login(email, password, success, failure) {
-        // where is your wordpress site?
+        // where is your wordpress site that we want to communicate with?
         var apiHost = '//localhost/wordpress/wp-json';
 
         var data = {
             username: email,
             password: password
         };
-        // the important bit, contact the end point and ask for a token
+        // the important bit, contact the JWT end point and ask for an authentication token
         $.post(apiHost + '/jwt-auth/v1/token', data).error(function (error) {
+            // pass back the failure message to the calling function
             failure(error);
         }).done(function (data) {
             // you are now logged in, save the cookie to validate further requests
             var jwtDetails = JSON.stringify(data);
+            // show the cookie details in the console just for interest
             console.log(jwtDetails);
             // expire our cookie in 7 days
             createCookie(COOKIE_NAME, jwtDetails, 7);
+            // pass back a successful message to our calling function
             success(data);
         });
 
